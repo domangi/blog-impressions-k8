@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog-configmap
+data:
+  DATABASE_NAME: blog_development
+  DATABASE_HOST: mysql
+  DATABASE_PORT: '3306'
+  DATABASE_USERNAME: 'root'
+  KAFKA_URL: kafka:9092
+  IMPRESSIONS_SERVICE_URL: 'impressions-service'

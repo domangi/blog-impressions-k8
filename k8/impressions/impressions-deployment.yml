@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: impressions-deployment
+  labels:
+    app: impressions
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: impressions
+  template:
+    metadata:
+      labels:
+        app: impressions
+    spec:
+      containers:
+        - name: impressions
+          image: domangi/impressions:v11
+          envFrom:
+            - configMapRef:
+                name: impressions-configmap
+          ports:
+            - name: http
+              containerPort: 4000

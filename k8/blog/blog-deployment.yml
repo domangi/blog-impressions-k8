@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-deployment
+  labels:
+    app: blog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+        - name: blog
+          image: domangi/blog:v5
+          envFrom:
+            - configMapRef:
+                name: blog-configmap
+          env:
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-root-password
+          ports:
+            - name: http
+              containerPort: 3000
